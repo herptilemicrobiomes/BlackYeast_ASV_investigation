@@ -8,7 +8,7 @@ library(tidyverse)
 parser <- ArgumentParser(description = "Plot a phylogenetic tree coloring ASVs")
 parser$add_argument("treefile", help = "Path to the tree file")
 parser$add_argument("outfile", help = "Path to the output PDF or PNG")
-args <- parser$parse_args(c("analysis/Exophiala/ITS__Exophiala_combined.FT.tre","analysis/Exophiala/ITS__Exophiala_combined.FT.pdf"))
+args <- parser$parse_args()
 
 tree <- read.tree(args$treefile)
 rootedtree = midpoint.root(tree)
