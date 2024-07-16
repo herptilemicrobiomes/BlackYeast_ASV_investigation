@@ -25,17 +25,19 @@ gzip -dc data/UHM_220913_herptile_microbiome/asv_tax_UNITE.fasta.gz | \
 module load ITSx
 module load mafft
 module load fasttree
-module load fasta
-module load samtools
 
 pushd $OUTDIR || exit
 if [ ! -f ITS__${PREFIX}_UNITE.ITSx.ITS1.fasta ]; then
 	ITSx -i ITS__${PREFIX}_UNITE.fa -o ITS__${PREFIX}_UNITE.ITSx --save_regions ITS1 --cpu $CPU -t F 
 fi
-ssearch36 -m 8c ITS__${PREFIX}_UHM_220913_herptile.fa ITS__${PREFIX}_UNITE.ITSx.ITS1.fasta  > ITS__${PREFIX}_UHM_220913_herptile.ITS1.ssearch.tsv
-cut -f1 ITS__${PREFIX}_UHM_220913_herptile.ITS1.ssearch.tsv | sort | uniq > ITS__${PREFIX}_UHM_220913_herptile.ITS1.ids
-samtools faidx ITS__${PREFIX}_UHM_220913_herptile.fa -r ITS__${PREFIX}_UHM_220913_herptile.ITS1.ids -o ITS__${PREFIX}_UHM_220913_herptile.ITS1.fa
-cat ITS__${PREFIX}_UHM_220913_herptile.ITS1.fa ITS__${PREFIX}_UNITE.ITSx.ITS1.fasta | perl -p -e 's/\|/ /g' > ITS__${PREFIX}_combined.fa
+# # previously wanted to screen for IDentity matching but let's trust taxonomy from ASV assignment
+# module load fasta
+# module load samtools
+# ssearch36 -b 2 -m 8c ITS__${PREFIX}_UHM_220913_herptile.fa ITS__${PREFIX}_UNITE.ITSx.ITS1.fasta  > ITS__${PREFIX}_UHM_220913_herptile.ITS1.ssearch.tsv
+# cut -f1 ITS__${PREFIX}_UHM_220913_herptile.ITS1.ssearch.tsv | sort | uniq > ITS__${PREFIX}_UHM_220913_herptile.ITS1.ids
+# samtools faidx ITS__${PREFIX}_UHM_220913_herptile.fa -r ITS__${PREFIX}_UHM_220913_herptile.ITS1.ids -o ITS__${PREFIX}_UHM_220913_herptile.ITS1.fa
+# cat ITS__${PREFIX}_UHM_220913_herptile.ITS1.fa ITS__${PREFIX}_UNITE.ITSx.ITS1.fasta | perl -p -e 's/\|/ /g' > ITS__${PREFIX}_combined.fa
+cat ITS__${PREFIX}_UHM_220913_herptile.fa ITS__${PREFIX}_UNITE.ITSx.ITS1.fasta | perl -p -e 's/\|/ /g' > ITS__${PREFIX}_combined.fa
 mafft ITS__${PREFIX}_combined.fa > ITS__${PREFIX}_combined.fasaln
 FastTreeMP -nt -gtr -gamma ITS__${PREFIX}_combined.fasaln > ITS__${PREFIX}_combined.FT.tre
 
