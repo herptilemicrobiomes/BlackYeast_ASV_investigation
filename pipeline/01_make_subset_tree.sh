@@ -19,7 +19,7 @@ if [ ! -f $INFILE ]; then
 fi
 NAME=$(sed -n ${N}p $INFILE)
 PREFIX=$(echo $NAME | cut -f3 -d_)
-TAXONLEVEL=$(echo $NAME | cut -f3 -d_)
+TAXONLEVEL=$(echo $NAME | cut -f1 -d_)
 OUTDIR=analysis/$PREFIX
 mkdir -p $OUTDIR
 # make a file from UNITE of all of this taxon set
