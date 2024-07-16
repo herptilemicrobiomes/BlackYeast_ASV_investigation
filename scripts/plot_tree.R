@@ -4,6 +4,7 @@ library(argparse)
 library(ggtree)
 library(ggplot2)
 library(tidyverse)
+library(phytools)
 # Define command-line arguments
 parser <- ArgumentParser(description = "Plot a phylogenetic tree coloring ASVs")
 parser$add_argument("treefile", help = "Path to the tree file")
@@ -24,5 +25,5 @@ df$label <- NULL
 p1 <- ggtree(rootedtree, layout="rectangular",size=0.5) %<+% dd + 
   geom_tiplab(size=1.75, aes(color=ITStype)) +
   scale_color_manual(values = c("red","black")) + theme_tree() + theme(legend.position="none")
-p1
+
 ggsave(args$outfile,p1,height=20,width=20)

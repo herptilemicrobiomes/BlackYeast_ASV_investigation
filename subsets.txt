@@ -1,0 +1,17 @@
+g__Exophiala
+o__Capnodiales
+o__Chaetothyriales
+c__Saccharomycetes
+p__Mucoromycota
+c__Tremellomycetes
+c__Lecanoromycetes
+c__Exobasidiomycetes
+c__Taphrinomycetes
+p__Rozellomycota
+c__Agaricomycetes
+c__Basidiobolomycetes
+c__Zoopagomycetes
+c__Monoblepharidomycetes
+c__Malasseziomycetes
+c__Pucciniomycetes
+p__Mortierellomycota
